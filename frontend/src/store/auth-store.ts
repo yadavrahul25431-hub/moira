@@ -43,8 +43,11 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       email: payload.email,
       firstName: "Demo",
       lastName: "User",
-      role: "ADMIN" as any,
+      role: "ADMIN",
+      avatarUrl: null,
+      phone: null,
       isActive: true,
+      lastLoginAt: new Date().toISOString(),
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
     };
@@ -87,8 +90,11 @@ export const useAuthStore = create<AuthState>((set, get) => ({
         email: payload.email,
         firstName: payload.firstName,
         lastName: payload.lastName,
-        role: "ADMIN" as any,
+        role: "ADMIN",
+        avatarUrl: null,
+        phone: null,
         isActive: true,
+        lastLoginAt: new Date().toISOString(),
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       };
@@ -160,8 +166,11 @@ export const useAuthStore = create<AuthState>((set, get) => ({
         email: "demo@moira.ai",
         firstName: "Demo",
         lastName: "Admin",
-        role: "ADMIN" as any,
+        role: "ADMIN",
+        avatarUrl: null,
+        phone: null,
         isActive: true,
+        lastLoginAt: new Date().toISOString(),
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       };
