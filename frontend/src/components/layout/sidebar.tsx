@@ -19,9 +19,9 @@ import { useAuth } from "@/hooks/use-auth";
 const navItems = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
   { icon: Zap, label: "Smart Commute", href: "/smart-commute" },
-  { icon: Map, label: "Route Optimization", href: "/routes" },
+  { icon: Map, label: "M-CORE", href: "/routes" },
   { icon: Truck, label: "Fleet Management", href: "/vehicles" },
-  { icon: BarChart3, label: "Analytics", href: "/analytics" },
+  { icon: BarChart3, label: "ORION", href: "/analytics" },
   { icon: Bot, label: "RASMUS AI", href: "/assistant" },
 ];
 

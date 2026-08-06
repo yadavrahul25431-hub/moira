@@ -22,25 +22,25 @@ interface Feature {
 const features: Feature[] = [
   {
     icon: Sparkles,
-    title: "Route optimization",
+    title: "RASMUS AI",
     description:
-      "Neural networks analyze thousands of route permutations in real-time to deliver the fastest, most fuel-efficient paths.",
+      "Conversational assistant for fleet operators — intelligent, context-aware, and always active.",
     gradient: "from-blue-500/20 to-cyan-500/10",
     iconColor: "text-blue-400",
   },
   {
     icon: BarChart3,
-    title: "Fleet management",
+    title: "M-CORE",
     description:
-      "Comprehensive dashboards with real-time KPIs, driver performance scoring, and fuel consumption trends.",
+      "Real-time route optimization engine generating thousands of route variations within seconds.",
     gradient: "from-violet-500/20 to-purple-500/10",
     iconColor: "text-violet-400",
   },
   {
     icon: LineChart,
-    title: "Predictive analytics",
+    title: "ORION",
     description:
-      "Anticipate vehicle maintenance needs and optimize resource allocation based on historical performance data.",
+      "Predictive analytics engine for traffic patterns, demand forecasting, emissions analysis, and operational insights.",
     gradient: "from-emerald-500/20 to-teal-500/10",
     iconColor: "text-emerald-400",
   },
