@@ -167,9 +167,9 @@ export default function AIFleetCommandCenter() {
                     <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
                       <motion.div 
                         initial={{ width: 0 }}
-                        animate={{ width: \`\${stat.progress}%\` }}
+                        animate={{ width: `${stat.progress}%` }}
                         transition={{ duration: 1, delay: 0.5 }}
-                        className={\`h-full rounded-full \${stat.alert ? 'bg-amber-400' : 'button-gradient'}\`}
+                        className={`h-full rounded-full ${stat.alert ? 'bg-amber-400' : 'button-gradient'}`}
                       />
                     </div>
                   </div>
@@ -186,7 +186,7 @@ export default function AIFleetCommandCenter() {
                   <div key={i} className="flex-1 flex flex-col justify-end group">
                     <motion.div 
                       initial={{ height: 0 }}
-                      animate={{ height: \`\${h}%\` }}
+                      animate={{ height: `${h}%` }}
                       transition={{ duration: 0.8, delay: i * 0.1 }}
                       className="w-full bg-gradient-to-t from-primary/80 to-accent/80 rounded-t-sm group-hover:from-primary group-hover:to-accent transition-colors relative"
                     >
@@ -270,7 +270,7 @@ export default function AIFleetCommandCenter() {
                   </div>
                   <div className="text-right">
                     <div className="text-[10px] text-muted-foreground mb-0.5">Readiness</div>
-                    <div className={\`text-xs font-mono font-bold \${v.fatigueScore > 90 ? 'text-emerald-400' : 'text-amber-400'}\`}>
+                    <div className={`text-xs font-mono font-bold ${v.fatigueScore > 90 ? 'text-emerald-400' : 'text-amber-400'}`}>
                       {v.fatigueScore}%
                     </div>
                   </div>
