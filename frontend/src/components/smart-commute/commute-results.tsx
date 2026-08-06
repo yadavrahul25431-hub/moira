@@ -8,7 +8,7 @@ export function CommuteResults({ results, isLoading }: { results: any, isLoading
       <Card className="h-full border-white/10 glass flex items-center justify-center rounded-2xl">
         <div className="flex flex-col items-center gap-4 opacity-70">
           <Zap className="h-10 w-10 animate-pulse text-primary drop-shadow-[0_0_10px_rgba(79,140,255,0.8)]" />
-          <p className="text-sm font-medium text-white">Running AI spatial models...</p>
+          <p className="text-sm font-medium text-foreground">Running AI spatial models...</p>
         </div>
       </Card>
     );
@@ -19,7 +19,7 @@ export function CommuteResults({ results, isLoading }: { results: any, isLoading
       <Card className="h-full border-white/5 glass flex items-center justify-center rounded-2xl">
         <div className="flex flex-col items-center gap-4 opacity-50">
           <Train className="h-10 w-10 text-muted-foreground" />
-          <p className="text-sm font-medium text-white">Generate a commute plan to see live AI insights.</p>
+          <p className="text-sm font-medium text-foreground">Generate a commute plan to see live AI insights.</p>
         </div>
       </Card>
     );
@@ -48,7 +48,7 @@ export function CommuteResults({ results, isLoading }: { results: any, isLoading
                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" /> LIVE
               </span>
             </CardTitle>
-            <div className="text-3xl font-black text-white mt-2 font-heading tracking-tight">
+            <div className="text-3xl font-black text-foreground mt-2 font-heading tracking-tight">
               {results.recommendedMode}
             </div>
           </CardHeader>
@@ -61,7 +61,7 @@ export function CommuteResults({ results, isLoading }: { results: any, isLoading
                 <motion.p 
                   key={results.eta}
                   initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }}
-                  className="text-3xl font-bold font-mono text-white"
+                  className="text-3xl font-bold font-mono text-foreground"
                 >
                   {results.eta} <span className="text-base text-muted-foreground">mins</span>
                 </motion.p>
@@ -73,7 +73,7 @@ export function CommuteResults({ results, isLoading }: { results: any, isLoading
                 <motion.p 
                   key={results.fuelCost}
                   initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }}
-                  className="text-3xl font-bold font-mono text-white"
+                  className="text-3xl font-bold font-mono text-foreground"
                 >
                   ₹{results.fuelCost}
                 </motion.p>
@@ -88,7 +88,7 @@ export function CommuteResults({ results, isLoading }: { results: any, isLoading
         {/* Fuel Used */}
         <motion.div variants={item} className="card-gradient rounded-2xl p-4 border border-white/5 flex flex-col justify-center items-center text-center">
           <Droplets className="h-5 w-5 text-blue-400 mb-2" />
-          <motion.span key={results.fuelUsed} initial={{ scale: 1.1 }} animate={{ scale: 1 }} className="text-2xl font-bold font-mono text-white">
+          <motion.span key={results.fuelUsed} initial={{ scale: 1.1 }} animate={{ scale: 1 }} className="text-2xl font-bold font-mono text-foreground">
             {results.fuelUsed}L
           </motion.span>
           <span className="text-[10px] uppercase text-muted-foreground tracking-wider mt-1">Consumption</span>
@@ -129,10 +129,10 @@ export function CommuteResults({ results, isLoading }: { results: any, isLoading
           <CardContent className="p-6 flex flex-col md:flex-row items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="h-12 w-12 rounded-xl button-gradient flex items-center justify-center">
-                <Zap className="h-6 w-6 text-white" />
+                <Zap className="h-6 w-6 text-foreground" />
               </div>
               <div>
-                <p className="text-sm font-bold text-white tracking-wide">ROUTE EFFICIENCY</p>
+                <p className="text-sm font-bold text-foreground tracking-wide">ROUTE EFFICIENCY</p>
                 <p className="text-xs text-muted-foreground">Calculated across 5 variables</p>
               </div>
             </div>
