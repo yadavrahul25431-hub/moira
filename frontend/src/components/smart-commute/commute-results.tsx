@@ -48,7 +48,13 @@ export function CommuteResults({ results, isLoading }: { results: any, isLoading
                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" /> LIVE
               </span>
             </CardTitle>
-            <div className="text-3xl font-black text-black mt-2 font-heading tracking-tight">
+            <div className={`text-3xl font-black mt-2 font-heading tracking-tight ${
+              results.recommendedMode.includes('ELECTRIC') ? 'text-emerald-500 drop-shadow-[0_0_10px_rgba(16,185,129,0.3)]' :
+              results.recommendedMode.includes('METRO') ? 'text-blue-500 drop-shadow-[0_0_10px_rgba(59,130,246,0.3)]' :
+              results.recommendedMode.includes('CAB') ? 'text-amber-500 drop-shadow-[0_0_10px_rgba(245,158,11,0.3)]' :
+              results.recommendedMode.includes('BIKE') ? 'text-cyan-500 drop-shadow-[0_0_10px_rgba(6,182,212,0.3)]' :
+              'text-violet-500 drop-shadow-[0_0_10px_rgba(139,92,246,0.3)]'
+            }`}>
               {results.recommendedMode}
             </div>
           </CardHeader>
