@@ -30,6 +30,30 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
   login: async (payload: LoginPayload) => {
     set({ isLoading: true, error: null });
+
+    // ==========================================
+    // DEMO MODE BYPASS (No backend required)
+    // ==========================================
+    if (payload.email === "demo@moira.ai" || payload.email === "admin@movemind.ai" || payload.email.includes("demo")) {
+      setTimeout(() => {
+        const dummyUser: User = {
+          id: "demo-123",
+          email: payload.email,
+          firstName: "Demo",
+          lastName: "Admin",
+          role: "ADMIN" as any,
+          isActive: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        };
+        
+        Cookies.set("movemind_token", "dummy_token", { expires: 7 });
+        set({ user: dummyUser, isAuthenticated: true, isLoading: false, error: null });
+      }, 1000);
+      return;
+    }
+    // ==========================================
+
     try {
       const { data } = await api.post<{ success: boolean; data: AuthResponse }>(
         "/auth/login",
@@ -52,6 +76,26 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
   register: async (payload: RegisterPayload) => {
     set({ isLoading: true, error: null });
+    
+    // DEMO MODE BYPASS
+    if (payload.email.includes("demo")) {
+      setTimeout(() => {
+        const dummyUser: User = {
+          id: "demo-123",
+          email: payload.email,
+          firstName: payload.firstName,
+          lastName: payload.lastName,
+          role: "ADMIN" as any,
+          isActive: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        };
+        Cookies.set("movemind_token", "dummy_token", { expires: 7 });
+        set({ user: dummyUser, isAuthenticated: true, isLoading: false, error: null });
+      }, 1000);
+      return;
+    }
+
     try {
       const { data } = await api.post<{ success: boolean; data: AuthResponse }>(
         "/auth/register",
@@ -87,7 +131,9 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   logout: async () => {
     try {
       const refreshToken = Cookies.get("movemind_refresh_token");
-      await api.post("/auth/logout", { refreshToken });
+      if (refreshToken && Cookies.get("movemind_token") !== "dummy_token") {
+        await api.post("/auth/logout", { refreshToken });
+      }
     } catch {
       // Silently fail — we still want to clear local state
     } finally {
@@ -105,6 +151,23 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     }
 
     set({ isLoading: true });
+
+    // DEMO MODE BYPASS
+    if (token === "dummy_token") {
+      const dummyUser: User = {
+        id: "demo-123",
+        email: "demo@moira.ai",
+        firstName: "Demo",
+        lastName: "Admin",
+        role: "ADMIN" as any,
+        isActive: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+      set({ user: dummyUser, isAuthenticated: true, isLoading: false });
+      return;
+    }
+
     try {
       const { data } = await api.get<{
         success: boolean;
