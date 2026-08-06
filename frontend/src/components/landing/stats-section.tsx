@@ -6,38 +6,46 @@ import { motion, useInView } from "framer-motion";
 interface StatItem {
   value: number;
   suffix: string;
+  prefix?: string;
   label: string;
   description: string;
 }
 
 const stats: StatItem[] = [
   {
-    value: 98.5,
-    suffix: "%",
-    label: "Route Accuracy",
-    description: "AI-optimized path precision across all fleet operations",
-  },
-  {
-    value: 2.5,
-    suffix: "M+",
-    label: "Miles Optimized",
-    description: "Total distance optimized for partners worldwide",
-  },
-  {
-    value: 150,
+    value: 12500,
     suffix: "+",
-    label: "Fleet Partners",
-    description: "Enterprise clients managing their fleets with us",
+    label: "Active Vehicles",
+    description: "Live monitored vehicles",
   },
   {
-    value: 99.9,
+    value: 420,
+    suffix: "",
+    label: "Traffic Incidents",
+    description: "Prevented daily",
+  },
+  {
+    value: 12,
     suffix: "%",
-    label: "Platform Uptime",
-    description: "Reliable infrastructure for mission-critical operations",
+    prefix: "-",
+    label: "Average ETA",
+    description: "Reduction in travel time",
+  },
+  {
+    value: 24,
+    suffix: "%",
+    prefix: "+",
+    label: "Fuel Efficiency",
+    description: "Optimized consumption",
+  },
+  {
+    value: 45,
+    suffix: "k",
+    label: "Carbon Reduction",
+    description: "Tons of CO2 saved",
   },
 ];
 
-// Animated counter hook that counts up when element scrolls into view
 function useAnimatedCounter(
   end: number,
   duration: number = 2000,
@@ -56,8 +64,6 @@ function useAnimatedCounter(
     function animate(timestamp: number) {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
-
-      // Ease-out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       const current = eased * end;
 
@@ -98,20 +104,17 @@ function StatCard({ stat, inView }: { stat: StatItem; inView: boolean }) {
 
   return (
     <motion.div variants={itemVariants} className="group relative text-center">
-      {/* Accent glow on hover */}
       <div className="absolute inset-0 -m-4 rounded-2xl bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-      <div className="relative">
-        <div className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
-          <span className="gradient-text">
-            {count}
-            {stat.suffix}
-          </span>
+      <div className="relative glass-subtle p-6 rounded-2xl h-full flex flex-col justify-center items-center shadow-lg shadow-black/20 hover:shadow-primary/10 transition-shadow">
+        <div className="text-4xl sm:text-5xl font-extrabold tracking-tight text-stats text-white">
+          <span className="text-primary">{stat.prefix}</span>
+          {count}
+          <span className="text-primary">{stat.suffix}</span>
         </div>
-        <p className="mt-3 text-sm sm:text-base font-semibold text-foreground">
+        <p className="mt-4 text-base font-semibold text-foreground font-subheading">
           {stat.label}
         </p>
-        <p className="mt-1.5 text-xs sm:text-sm text-muted-foreground max-w-[200px] mx-auto leading-relaxed">
+        <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
           {stat.description}
         </p>
       </div>
@@ -129,42 +132,27 @@ export function StatsSection() {
       ref={ref}
       className="relative py-24 sm:py-32 overflow-hidden"
     >
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/30 to-background" />
-      <div className="absolute inset-0 bg-dot opacity-40" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
+      <div className="absolute inset-0 bg-dot opacity-30" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16"
         >
-          <p className="text-sm font-semibold text-primary tracking-wider uppercase mb-3">
-            By the Numbers
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-            Trusted by fleets{" "}
-            <span className="gradient-text">worldwide</span>
-          </h2>
+          <h2>Platform Impact</h2>
         </motion.div>
 
-        {/* Stats grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4"
+          className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6"
         >
-          {stats.map((stat, i) => (
-            <div key={stat.label} className="relative">
-              <StatCard stat={stat} inView={isInView} />
-              {/* Vertical divider (desktop only) */}
-              {i < stats.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 -translate-y-1/2 -right-2 h-16 w-px bg-gradient-to-b from-transparent via-border/60 to-transparent" />
-              )}
-            </div>
+          {stats.map((stat) => (
+            <StatCard key={stat.label} stat={stat} inView={isInView} />
           ))}
         </motion.div>
       </div>

@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/landing/navbar";
 import { HeroSection } from "@/components/landing/hero-section";
 import { StatsSection } from "@/components/landing/stats-section";
+import { MapSection } from "@/components/landing/map-section";
 import { FeaturesSection } from "@/components/landing/features-section";
 import { Footer } from "@/components/landing/footer";
 
@@ -10,6 +11,7 @@ export default function HomePage() {
       <Navbar />
       <HeroSection />
       <StatsSection />
+      <MapSection />
       <FeaturesSection />
       <Footer />
     </main>

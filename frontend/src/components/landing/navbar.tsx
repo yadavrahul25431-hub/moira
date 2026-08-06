@@ -2,15 +2,16 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Zap } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { label: "Features", href: "#features" },
-  { label: "Analytics", href: "#stats" },
-  { label: "Solutions", href: "#solutions" },
-  { label: "About", href: "#about" },
+  { label: "Dashboard", href: "/dashboard" },
+  { label: "Routes", href: "/routes" },
+  { label: "Analytics", href: "/analytics" },
+  { label: "RASMUS AI", href: "/assistant" },
 ];
 
 export function Navbar() {
@@ -40,61 +41,60 @@ export function Navbar() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           isScrolled
-            ? "bg-background/70 backdrop-blur-2xl border-b border-border/40 shadow-lg shadow-black/5"
+            ? "bg-background/40 backdrop-blur-2xl border-b border-border/40 shadow-lg shadow-black/20"
             : "bg-transparent"
         )}
       >
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between lg:h-18">
+          <div className="flex h-20 items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 via-violet-500 to-cyan-500 shadow-lg shadow-blue-500/25 transition-shadow duration-300 group-hover:shadow-blue-500/40">
-                <Zap className="h-5 w-5 text-white" strokeWidth={2.5} />
-              </div>
-              <span className="text-lg font-bold tracking-tight text-foreground">
-                Move<span className="gradient-text">Mind</span>
+            <Link href="/" className="flex items-center gap-4 group">
+              <Image 
+                src="/logo.png" 
+                alt="MOIRA Logo" 
+                width={48} 
+                height={48} 
+                className="object-contain mix-blend-screen transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
+              />
+              <span className="text-logo text-foreground tracking-wider group-hover:text-primary transition-colors duration-300">
+                MOIRA
               </span>
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden md:flex items-center gap-2 bg-white/5 backdrop-blur-md rounded-full px-2 py-1 border border-white/10">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.label}
                   href={link.href}
-                  className="relative px-4 py-2 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground rounded-lg hover:bg-white/5"
+                  className="relative px-4 py-2 text-sm font-medium text-muted-foreground transition-all duration-300 hover:text-white rounded-full hover:bg-white/10"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
 
             {/* Desktop CTA */}
-            <div className="hidden md:flex items-center gap-3">
+            <div className="hidden md:flex items-center">
               <Link
                 href="/login"
-                className="px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                className="relative inline-flex items-center px-6 py-2.5 text-sm font-semibold text-primary-foreground rounded-full bg-primary overflow-hidden group shadow-[0_0_20px_rgba(79,140,255,0.3)] hover:shadow-[0_0_30px_rgba(79,140,255,0.5)] transition-all duration-500"
               >
-                Sign In
-              </Link>
-              <Link
-                href="/register"
-                className="relative inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white rounded-xl bg-gradient-to-r from-blue-600 via-violet-600 to-blue-600 bg-[length:200%_100%] shadow-lg shadow-blue-500/25 transition-all duration-500 hover:bg-right hover:shadow-blue-500/40 hover:scale-[1.02] active:scale-[0.98]"
-              >
-                Get Started
+                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+                <span className="relative">Login</span>
               </Link>
             </div>
 
             {/* Mobile Toggle */}
             <button
               onClick={() => setIsMobileOpen(!isMobileOpen)}
-              className="md:hidden relative z-50 p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors"
+              className="md:hidden relative z-50 p-2 rounded-lg text-muted-foreground hover:text-white hover:bg-white/5 transition-colors"
               aria-label="Toggle menu"
             >
               {isMobileOpen ? (
-                <X className="h-5 w-5" />
+                <X className="h-6 w-6" />
               ) : (
-                <Menu className="h-5 w-5" />
+                <Menu className="h-6 w-6" />
               )}
             </button>
           </div>
@@ -113,7 +113,7 @@ export function Navbar() {
           >
             {/* Backdrop */}
             <div
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              className="absolute inset-0 bg-background/80 backdrop-blur-xl"
               onClick={() => setIsMobileOpen(false)}
             />
 
@@ -123,39 +123,41 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute right-0 top-0 bottom-0 w-[280px] bg-background/95 backdrop-blur-2xl border-l border-border/50 p-6 pt-20"
+              className="absolute right-0 top-0 bottom-0 w-[300px] bg-card/50 backdrop-blur-3xl border-l border-border/50 p-6 pt-24"
             >
               <div className="flex flex-col gap-2">
                 {navLinks.map((link, i) => (
-                  <motion.a
+                  <motion.div
                     key={link.label}
-                    href={link.href}
-                    onClick={() => setIsMobileOpen(false)}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 + i * 0.05 }}
-                    className="px-4 py-3 text-base font-medium text-muted-foreground hover:text-foreground rounded-xl hover:bg-white/5 transition-colors"
                   >
-                    {link.label}
-                  </motion.a>
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsMobileOpen(false)}
+                      className="block px-4 py-3 text-lg font-medium text-muted-foreground hover:text-white rounded-xl hover:bg-white/5 transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
                 ))}
 
-                <div className="h-px bg-border/50 my-4" />
+                <div className="h-px bg-border/50 my-6" />
 
-                <Link
-                  href="/login"
-                  onClick={() => setIsMobileOpen(false)}
-                  className="px-4 py-3 text-base font-medium text-muted-foreground hover:text-foreground rounded-xl hover:bg-white/5 transition-colors"
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 }}
                 >
-                  Sign In
-                </Link>
-                <Link
-                  href="/register"
-                  onClick={() => setIsMobileOpen(false)}
-                  className="mt-2 flex items-center justify-center px-5 py-3 text-base font-semibold text-white rounded-xl bg-gradient-to-r from-blue-600 to-violet-600 shadow-lg shadow-blue-500/25"
-                >
-                  Get Started
-                </Link>
+                  <Link
+                    href="/login"
+                    onClick={() => setIsMobileOpen(false)}
+                    className="flex items-center justify-center px-5 py-3 text-base font-semibold text-primary-foreground rounded-xl bg-primary shadow-lg shadow-primary/25"
+                  >
+                    Login
+                  </Link>
+                </motion.div>
               </div>
             </motion.div>
           </motion.div>

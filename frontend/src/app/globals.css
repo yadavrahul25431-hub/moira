@@ -83,13 +83,22 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground font-sans antialiased text-[14px] font-normal;
+    @apply bg-background text-foreground font-sans antialiased text-[16px] font-normal;
   }
-  h1, h2 {
-    @apply font-heading text-[24px] font-bold;
+  h1 {
+    @apply font-heading text-[72px] font-[800];
+  }
+  h2 {
+    @apply font-heading text-[32px] font-bold;
   }
   h3, h4 {
-    @apply font-heading text-[18px] font-medium;
+    @apply font-subheading text-[18px] font-medium;
+  }
+  .text-logo {
+    @apply font-logo text-[42px] font-[700];
+  }
+  .text-stats {
+    @apply font-mono text-[18px];
   }
 }
 

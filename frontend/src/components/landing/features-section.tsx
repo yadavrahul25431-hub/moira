@@ -6,9 +6,9 @@ import {
   Sparkles,
   BarChart3,
   Radio,
-  MessageSquareText,
-  MapPinned,
-  Leaf,
+  LineChart,
+  ShieldAlert,
+  Bot,
 } from "lucide-react";
 
 interface Feature {
@@ -22,51 +22,51 @@ interface Feature {
 const features: Feature[] = [
   {
     icon: Sparkles,
-    title: "AI Route Optimization",
+    title: "Smart Routing",
     description:
-      "Neural networks analyze thousands of route permutations in real-time to deliver the fastest, most fuel-efficient paths for your entire fleet.",
+      "Neural networks analyze thousands of route permutations in real-time to deliver the fastest, most fuel-efficient paths.",
     gradient: "from-blue-500/20 to-cyan-500/10",
     iconColor: "text-blue-400",
-  },
-  {
-    icon: BarChart3,
-    title: "Fleet Analytics",
-    description:
-      "Comprehensive dashboards with real-time KPIs, driver performance scoring, fuel consumption trends, and predictive maintenance alerts.",
-    gradient: "from-violet-500/20 to-purple-500/10",
-    iconColor: "text-violet-400",
   },
   {
     icon: Radio,
     title: "Traffic Prediction",
     description:
-      "Machine learning models trained on historical and live data forecast congestion patterns up to 4 hours ahead with 98% accuracy.",
+      "Machine learning models forecast congestion patterns and bottlenecks up to 4 hours ahead with 98% accuracy.",
     gradient: "from-amber-500/20 to-orange-500/10",
     iconColor: "text-amber-400",
   },
   {
-    icon: MessageSquareText,
-    title: "AI Assistant",
+    icon: BarChart3,
+    title: "Fleet Intelligence",
     description:
-      "Natural language interface powered by Gemini AI. Ask questions, get insights, generate reports, and control your fleet through conversation.",
+      "Comprehensive dashboards with real-time KPIs, driver performance scoring, and fuel consumption trends.",
+    gradient: "from-violet-500/20 to-purple-500/10",
+    iconColor: "text-violet-400",
+  },
+  {
+    icon: LineChart,
+    title: "Predictive Analytics",
+    description:
+      "Anticipate vehicle maintenance needs and optimize resource allocation based on historical performance data.",
     gradient: "from-emerald-500/20 to-teal-500/10",
     iconColor: "text-emerald-400",
   },
   {
-    icon: MapPinned,
-    title: "Interactive Maps",
+    icon: ShieldAlert,
+    title: "Dynamic Incident Detection",
     description:
-      "Real-time vehicle tracking on beautiful interactive maps with live traffic layers, geofencing, and customizable alert zones.",
-    gradient: "from-cyan-500/20 to-blue-500/10",
-    iconColor: "text-cyan-400",
+      "Instantly detect accidents, weather events, or road closures and automatically reroute affected vehicles.",
+    gradient: "from-rose-500/20 to-red-500/10",
+    iconColor: "text-rose-400",
   },
   {
-    icon: Leaf,
-    title: "Eco Intelligence",
+    icon: Bot,
+    title: "RASMUS AI",
     description:
-      "Track and reduce your fleet's carbon footprint with AI-driven eco-routing, emissions reporting, and sustainability scorecards.",
-    gradient: "from-emerald-500/20 to-green-500/10",
-    iconColor: "text-emerald-400",
+      "Your intelligent mobility co-pilot. Ask questions, generate insights, and control your operations through conversation.",
+    gradient: "from-cyan-500/20 to-blue-500/10",
+    iconColor: "text-cyan-400",
   },
 ];
 
@@ -97,29 +97,24 @@ function FeatureCard({ feature }: { feature: Feature }) {
       whileHover={{ y: -6, transition: { duration: 0.3 } }}
       className="group relative"
     >
-      {/* Glow on hover */}
-      <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/20 via-transparent to-violet-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
+      <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/30 via-transparent to-accent/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md" />
 
-      <div className="relative h-full rounded-2xl glass p-6 sm:p-7 transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-xl group-hover:shadow-primary/5">
-        {/* Icon */}
+      <div className="relative h-full rounded-2xl glass p-6 sm:p-7 transition-all duration-500 border border-white/5 group-hover:border-primary/50 group-hover:bg-card/80">
         <div
           className={`mb-5 inline-flex items-center justify-center h-12 w-12 rounded-xl bg-gradient-to-br ${feature.gradient} border border-white/[0.06]`}
         >
           <Icon className={`h-6 w-6 ${feature.iconColor}`} strokeWidth={1.8} />
         </div>
 
-        {/* Title */}
-        <h3 className="text-lg font-semibold text-foreground mb-2.5 tracking-tight">
+        <h3 className="text-foreground mb-2.5">
           {feature.title}
         </h3>
 
-        {/* Description */}
         <p className="text-sm text-muted-foreground leading-relaxed">
           {feature.description}
         </p>
 
-        {/* Bottom accent line */}
-        <div className="mt-5 h-px w-0 group-hover:w-full bg-gradient-to-r from-primary/50 via-violet-500/50 to-transparent transition-all duration-700" />
+        <div className="mt-5 h-px w-0 group-hover:w-full bg-gradient-to-r from-primary/50 via-accent/50 to-transparent transition-all duration-700" />
       </div>
     </motion.div>
   );
@@ -133,15 +128,13 @@ export function FeaturesSection() {
     <section
       id="features"
       ref={ref}
-      className="relative py-24 sm:py-32 overflow-hidden"
+      className="relative py-24 sm:py-32 overflow-hidden bg-secondary/5"
     >
-      {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-primary/5 blur-[120px]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -149,25 +142,22 @@ export function FeaturesSection() {
           className="text-center max-w-2xl mx-auto mb-16"
         >
           <p className="text-sm font-semibold text-primary tracking-wider uppercase mb-3">
-            Powerful Features
+            Powerful Architecture
           </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-            Everything you need to{" "}
-            <span className="gradient-text">move smarter</span>
+          <h2>
+            Intelligence at every{" "}
+            <span className="gradient-text">layer</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
-            A complete intelligent mobility toolkit. From route planning to
-            emissions tracking, every feature is designed to make your fleet
-            operations effortless.
+          <p className="mt-4 text-lg text-muted-foreground leading-relaxed font-subheading">
+            A complete intelligent mobility toolkit designed to make your operations effortless and highly efficient.
           </p>
         </motion.div>
 
-        {/* Features Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {features.map((feature) => (
             <FeatureCard key={feature.title} feature={feature} />

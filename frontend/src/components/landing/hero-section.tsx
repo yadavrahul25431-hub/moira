@@ -118,22 +118,21 @@ export function HeroSection() {
             {/* Heading */}
             <motion.h1
               variants={itemVariants}
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.08]"
+              className="text-4xl sm:text-5xl lg:text-7xl font-[800] tracking-tight leading-[1.08] text-foreground uppercase"
             >
-              Intelligent
+              PREDICT.
               <br />
-              Mobility,{" "}
-              <span className="gradient-text">Reimagined</span>
+              <span className="gradient-text">OPTIMIZE.</span>
+              <br />
+              MOVE SMARTER.
             </motion.h1>
 
             {/* Subtitle */}
             <motion.p
               variants={itemVariants}
-              className="mt-6 text-base sm:text-lg lg:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed"
+              className="mt-6 text-base sm:text-lg lg:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed font-subheading"
             >
-              Optimize every route, predict traffic patterns, and manage your
-              entire fleet with the power of AI. Move smarter. Move faster.
-              Move with confidence.
+              Transforming mobility through artificial intelligence.
             </motion.p>
 
             {/* CTAs */}
@@ -142,15 +141,16 @@ export function HeroSection() {
               className="mt-10 flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start"
             >
               <Link
-                href="/register"
-                className="group relative inline-flex items-center gap-2 px-7 py-3.5 text-sm font-semibold text-white rounded-xl bg-gradient-to-r from-blue-600 via-violet-600 to-blue-600 bg-[length:200%_100%] shadow-2xl shadow-blue-500/25 transition-all duration-500 hover:bg-right hover:shadow-blue-500/40 hover:scale-[1.03] active:scale-[0.98]"
+                href="/dashboard"
+                className="group relative inline-flex items-center gap-2 px-8 py-4 text-base font-semibold text-white rounded-full bg-primary overflow-hidden shadow-[0_0_30px_rgba(79,140,255,0.4)] transition-all duration-500 hover:shadow-[0_0_40px_rgba(79,140,255,0.6)] hover:scale-[1.02]"
               >
-                Start Free Trial
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000" />
+                Launch Dashboard
+                <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
-              <button className="group inline-flex items-center gap-2.5 px-6 py-3.5 text-sm font-medium text-foreground/80 rounded-xl border border-border/60 hover:bg-white/5 hover:border-border transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
-                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 transition-colors group-hover:bg-white/15">
-                  <Play className="h-3 w-3 text-foreground/80 ml-0.5" />
+              <button className="group inline-flex items-center gap-3 px-8 py-4 text-base font-medium text-foreground rounded-full border border-white/10 hover:bg-white/5 transition-all duration-300 hover:border-white/20 hover:scale-[1.02]">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 transition-colors group-hover:bg-white/20">
+                  <Play className="h-3 w-3 ml-0.5" />
                 </div>
                 Watch Demo
               </button>

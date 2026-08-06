@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Orbitron, Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { Orbitron, Space_Grotesk, Inter, JetBrains_Mono, Syncopate } from "next/font/google";
 import "./globals.css";
 
 const orbitron = Orbitron({ 
@@ -20,6 +20,12 @@ const inter = Inter({
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
+});
+
+const syncopate = Syncopate({
+  subsets: ["latin"],
+  weight: "700",
+  variable: "--font-syncopate",
 });
 
 export const metadata: Metadata = {
@@ -50,7 +56,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <body className={`${inter.variable} ${orbitron.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased overflow-x-hidden`}>
+      <body className={`${inter.variable} ${orbitron.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${syncopate.variable} font-sans antialiased overflow-x-hidden`}>
         {children}
       </body>
     </html>

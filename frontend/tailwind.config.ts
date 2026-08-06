@@ -73,8 +73,9 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        heading: ["var(--font-space-grotesk)", "sans-serif"],
-        logo: ["var(--font-orbitron)", "sans-serif"],
+        heading: ["var(--font-orbitron)", "sans-serif"],
+        subheading: ["var(--font-space-grotesk)", "sans-serif"],
+        logo: ["var(--font-syncopate)", "sans-serif"],
         mono: ["var(--font-jetbrains-mono)", "monospace"],
       },
       keyframes: {
