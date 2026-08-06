@@ -39,7 +39,8 @@ function MapBounds({ positions }: { positions: [number, number][] }) {
 }
 
 export default function VehicleMap({ vehicles }: VehicleMapProps) {
-  const defaultCenter: [number, number] = [40.7306, -73.9852]; // NYC Default
+  // Center of India (approximate: Nagpur/Central India)
+  const defaultCenter: [number, number] = [20.5937, 78.9629];
   const validPositions = vehicles
     .filter(v => v.currentLat && v.currentLng)
     .map(v => [v.currentLat!, v.currentLng!] as [number, number]);
