@@ -53,7 +53,7 @@ export async function chat(
 
     // Initialize the specific model
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash", // Using flash for fast, conversational responses
+      model: "gemini-3.6-flash", // Using flash for fast, conversational responses
       systemInstruction: SYSTEM_INSTRUCTION,
     });
 
