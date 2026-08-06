@@ -34,22 +34,23 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     // ==========================================
     // DEMO MODE BYPASS (No backend required)
     // ==========================================
-    if (payload.email === "demo@moira.ai" || payload.email === "admin@movemind.ai" || payload.email.includes("demo")) {
-      setTimeout(() => {
-        const dummyUser: User = {
-          id: "demo-123",
-          email: payload.email,
-          firstName: "Demo",
-          lastName: "Admin",
-          role: "ADMIN" as any,
-          isActive: true,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
-        };
-        
-        Cookies.set("movemind_token", "dummy_token", { expires: 7 });
-        set({ user: dummyUser, isAuthenticated: true, isLoading: false, error: null });
-      }, 1000);
+    const email = payload.email.toLowerCase();
+    if (email.includes("demo") || email.includes("admin")) {
+      await new Promise((resolve) => setTimeout(resolve, 800));
+      
+      const dummyUser: User = {
+        id: "demo-123",
+        email: payload.email,
+        firstName: "Demo",
+        lastName: "Admin",
+        role: "ADMIN" as any,
+        isActive: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+      
+      Cookies.set("movemind_token", "dummy_token", { expires: 7 });
+      set({ user: dummyUser, isAuthenticated: true, isLoading: false, error: null });
       return;
     }
     // ==========================================
@@ -78,21 +79,22 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     set({ isLoading: true, error: null });
     
     // DEMO MODE BYPASS
-    if (payload.email.includes("demo")) {
-      setTimeout(() => {
-        const dummyUser: User = {
-          id: "demo-123",
-          email: payload.email,
-          firstName: payload.firstName,
-          lastName: payload.lastName,
-          role: "ADMIN" as any,
-          isActive: true,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
-        };
-        Cookies.set("movemind_token", "dummy_token", { expires: 7 });
-        set({ user: dummyUser, isAuthenticated: true, isLoading: false, error: null });
-      }, 1000);
+    const email = payload.email.toLowerCase();
+    if (email.includes("demo") || email.includes("admin")) {
+      await new Promise((resolve) => setTimeout(resolve, 800));
+      
+      const dummyUser: User = {
+        id: "demo-123",
+        email: payload.email,
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+        role: "ADMIN" as any,
+        isActive: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+      Cookies.set("movemind_token", "dummy_token", { expires: 7 });
+      set({ user: dummyUser, isAuthenticated: true, isLoading: false, error: null });
       return;
     }
 
