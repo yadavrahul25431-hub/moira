@@ -35,24 +35,23 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     // DEMO MODE BYPASS (No backend required)
     // ==========================================
     const email = payload.email.toLowerCase();
-    if (email.includes("demo") || email.includes("admin")) {
-      await new Promise((resolve) => setTimeout(resolve, 800));
-      
-      const dummyUser: User = {
-        id: "demo-123",
-        email: payload.email,
-        firstName: "Demo",
-        lastName: "Admin",
-        role: "ADMIN" as any,
-        isActive: true,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-      };
-      
-      Cookies.set("movemind_token", "dummy_token", { expires: 7 });
-      set({ user: dummyUser, isAuthenticated: true, isLoading: false, error: null });
-      return;
-    }
+    
+    await new Promise((resolve) => setTimeout(resolve, 800));
+    
+    const dummyUser: User = {
+      id: "demo-123",
+      email: payload.email,
+      firstName: "Demo",
+      lastName: "User",
+      role: "ADMIN" as any,
+      isActive: true,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    
+    Cookies.set("movemind_token", "dummy_token", { expires: 7 });
+    set({ user: dummyUser, isAuthenticated: true, isLoading: false, error: null });
+    return;
     // ==========================================
 
     try {
