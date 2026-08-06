@@ -61,11 +61,12 @@ export function ChatInterface() {
       setMessages([...newHistory, { role: "model", content: data.data.reply }]);
     } catch (error: any) {
       console.error("Chat error:", error);
+      const errorMsg = error.response?.data?.message || error.message || "Unknown error";
       setMessages([
         ...newHistory,
         {
           role: "model",
-          content: "⚠️ I encountered an error connecting to my AI core. Please check the API key configuration on the server or try again later.",
+          content: `⚠️ I encountered an error connecting to my AI core. Please check the API key configuration on the server or try again later.\n\n**Debug Details:** ${errorMsg}`,
         },
       ]);
     } finally {
