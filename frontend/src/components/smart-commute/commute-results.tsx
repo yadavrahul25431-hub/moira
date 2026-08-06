@@ -43,7 +43,7 @@ export function CommuteResults({ results, isLoading }: { results: any, isLoading
           <div className="absolute inset-0 bg-primary/5 blur-xl pointer-events-none" />
           <CardHeader className="pb-4 relative z-10">
             <CardTitle className="text-xs font-bold uppercase tracking-widest text-primary flex justify-between items-center">
-              <span>AI Recommended Method</span>
+              <span className="text-black">AI Recommended Method</span>
               <span className="flex items-center gap-2 text-[10px] text-emerald-400 font-mono">
                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" /> LIVE
               </span>
