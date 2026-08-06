@@ -6,6 +6,7 @@ import { Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
 import { Loader2, Zap } from "lucide-react";
 import { EmergencyReroutingAlert } from "@/components/shared/emergency-rerouting-alert";
+import Image from "next/image";
 
 export default function DashboardLayout({
   children,
@@ -43,9 +44,15 @@ export default function DashboardLayout({
   if (!mounted || isLoading || !isAuthenticated) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-background gap-6">
-        <div className="relative flex h-20 w-20 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary shadow-2xl">
-          <div className="absolute inset-0 bg-primary/20 blur-xl rounded-xl animate-pulse"></div>
-          <Zap className="h-10 w-10 text-white z-10" />
+        <div className="relative flex items-center justify-center">
+          <div className="absolute inset-0 bg-primary/10 blur-2xl rounded-full animate-pulse"></div>
+          <Image 
+            src="/logo.png" 
+            alt="MOIRA Logo" 
+            width={80} 
+            height={80} 
+            className="object-contain animate-pulse z-10"
+          />
         </div>
         <div className="flex flex-col items-center gap-2">
           <h2 className="text-2xl font-bold tracking-tight text-foreground font-logo">MOIRA</h2>

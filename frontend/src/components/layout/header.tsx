@@ -5,6 +5,7 @@ import { Bell, Search, User, Settings, Zap } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/hooks/use-auth";
 import Link from "next/link";
+import Image from "next/image";
 
 export function Header() {
   const { user } = useAuth();
@@ -23,10 +24,14 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 flex h-16 shrink-0 items-center justify-between border-b bg-card/80 backdrop-blur-md px-6 shadow-sm">
       <div className="flex items-center gap-8">
-        <Link href="/dashboard" className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-secondary shadow-lg">
-            <Zap className="h-4 w-4 text-white" strokeWidth={2.5} />
-          </div>
+        <Link href="/dashboard" className="flex items-center gap-3">
+          <Image 
+            src="/logo.png" 
+            alt="MOIRA Logo" 
+            width={40} 
+            height={40} 
+            className="object-contain"
+          />
           <span className="text-3xl font-bold tracking-tight text-foreground font-logo">
             MOIRA
           </span>
