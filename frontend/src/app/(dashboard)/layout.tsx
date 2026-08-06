@@ -49,9 +49,9 @@ export default function DashboardLayout({
           <Image 
             src="/logo.png" 
             alt="MOIRA Logo" 
-            width={80} 
-            height={80} 
-            className="object-contain animate-pulse z-10"
+            width={120} 
+            height={120} 
+            className="object-contain animate-pulse z-10 mix-blend-screen"
           />
         </div>
         <div className="flex flex-col items-center gap-2">

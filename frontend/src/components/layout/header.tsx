@@ -28,9 +28,9 @@ export function Header() {
           <Image 
             src="/logo.png" 
             alt="MOIRA Logo" 
-            width={40} 
-            height={40} 
-            className="object-contain"
+            width={56} 
+            height={56} 
+            className="object-contain mix-blend-screen"
           />
           <span className="text-3xl font-bold tracking-tight text-foreground font-logo">
             MOIRA

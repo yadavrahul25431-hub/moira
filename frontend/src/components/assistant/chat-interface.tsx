@@ -87,8 +87,8 @@ export function ChatInterface() {
       {/* Header */}
       <div className="flex items-center justify-between px-6 py-4 border-b border-border/50 bg-muted/10">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-background shadow-md border border-border/50">
-            <Image src="/logo.png" alt="RASMUS" width={24} height={24} className="object-contain" />
+          <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-background shadow-md border border-border/50">
+            <Image src="/logo.png" alt="RASMUS" width={32} height={32} className="object-contain mix-blend-screen" />
           </div>
           <div>
             <h3 className="font-semibold leading-none font-heading text-lg text-primary">RASMUS AI</h3>
@@ -106,10 +106,10 @@ export function ChatInterface() {
         {messages.map((msg, idx) => (
           <div key={idx} className={`flex gap-4 max-w-[85%] ${msg.role === "user" ? "ml-auto flex-row-reverse" : ""}`}>
             {/* Avatar */}
-            <div className={`shrink-0 flex h-8 w-8 items-center justify-center rounded-full shadow-sm mt-1 border border-border/50
+            <div className={`shrink-0 flex h-10 w-10 items-center justify-center rounded-full shadow-sm mt-1 border border-border/50
               ${msg.role === "user" ? "bg-primary/20 text-primary border-none" : "bg-background"}
             `}>
-              {msg.role === "user" ? <User className="h-4 w-4" /> : <Image src="/logo.png" alt="RASMUS" width={16} height={16} className="object-contain" />}
+              {msg.role === "user" ? <User className="h-5 w-5" /> : <Image src="/logo.png" alt="RASMUS" width={24} height={24} className="object-contain mix-blend-screen" />}
             </div>
 
             {/* Bubble */}
@@ -135,8 +135,8 @@ export function ChatInterface() {
 
         {isLoading && (
           <div className="flex gap-4 max-w-[85%]">
-            <div className="shrink-0 flex h-8 w-8 items-center justify-center rounded-full bg-background border border-border/50 shadow-sm mt-1">
-              <Image src="/logo.png" alt="RASMUS" width={16} height={16} className="object-contain animate-pulse" />
+            <div className="shrink-0 flex h-10 w-10 items-center justify-center rounded-full bg-background border border-border/50 shadow-sm mt-1">
+              <Image src="/logo.png" alt="RASMUS" width={24} height={24} className="object-contain animate-pulse mix-blend-screen" />
             </div>
             <div className="px-5 py-4 rounded-2xl rounded-tl-sm bg-muted/50 border border-border/50 backdrop-blur-sm flex items-center gap-2 shadow-sm">
               <div className="h-2 w-2 bg-primary rounded-full animate-pulse_glow"></div>
