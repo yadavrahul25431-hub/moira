@@ -12,9 +12,7 @@ interface SmartCommuteFormProps {
 }
 
 const INDIAN_CITIES = [
-  "Hyderabad", "Bengaluru", "Chennai", "Mumbai", "Delhi", 
-  "Pune", "Kolkata", "Ahmedabad", "Vijayawada", "Visakhapatnam", 
-  "Tirupati", "Anantapur"
+  "Hyderabad", "Bengaluru", "Chennai", "Mumbai", "Delhi"
 ];
 
 export function SmartCommuteForm({ onSimulate, isLoading }: SmartCommuteFormProps) {
