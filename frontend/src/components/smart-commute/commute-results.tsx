@@ -48,7 +48,7 @@ export function CommuteResults({ results, isLoading }: { results: any, isLoading
                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" /> LIVE
               </span>
             </CardTitle>
-            <div className="text-3xl font-black text-foreground mt-2 font-heading tracking-tight">
+            <div className="text-3xl font-black text-black mt-2 font-heading tracking-tight">
               {results.recommendedMode}
             </div>
           </CardHeader>
