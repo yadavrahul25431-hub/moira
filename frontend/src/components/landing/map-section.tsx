@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Navigation } from "lucide-react";
 
 const cities = [
+  { name: "Delhi", x: "35%", y: "15%" },
   { name: "Mumbai", x: "25%", y: "45%" },
   { name: "Hyderabad", x: "45%", y: "55%" },
   { name: "Bengaluru", x: "40%", y: "75%" },
@@ -38,6 +39,28 @@ export function MapSection() {
               </linearGradient>
             </defs>
             
+            {/* DEL to MUM */}
+            <motion.path
+              d="M 35% 15% Q 30% 30% 25% 45%"
+              fill="none"
+              stroke="url(#routeGradient)"
+              strokeWidth="2"
+              strokeDasharray="4 4"
+              initial={{ pathLength: 0 }}
+              whileInView={{ pathLength: 1 }}
+              transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+            />
+            {/* DEL to HYD */}
+            <motion.path
+              d="M 35% 15% Q 40% 35% 45% 55%"
+              fill="none"
+              stroke="url(#routeGradient)"
+              strokeWidth="2"
+              strokeDasharray="4 4"
+              initial={{ pathLength: 0 }}
+              whileInView={{ pathLength: 1 }}
+              transition={{ duration: 2.5, delay: 0.3, repeat: Infinity, repeatType: "reverse" }}
+            />
             {/* HYD to MUM */}
             <motion.path
               d="M 25% 45% Q 35% 40% 45% 55%"
@@ -47,7 +70,7 @@ export function MapSection() {
               strokeDasharray="4 4"
               initial={{ pathLength: 0 }}
               whileInView={{ pathLength: 1 }}
-              transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+              transition={{ duration: 2, delay: 0.6, repeat: Infinity, repeatType: "reverse" }}
             />
             {/* HYD to BLR */}
             <motion.path
@@ -116,6 +139,18 @@ export function MapSection() {
             transition={{ duration: 5, delay: 2, repeat: Infinity, ease: "linear" }}
           >
             <Navigation className="h-5 w-5 rotate-90" />
+          </motion.div>
+
+          {/* Vehicle from Delhi */}
+          <motion.div
+            className="absolute z-20 text-secondary drop-shadow-[0_0_8px_rgba(123,97,255,0.8)] -translate-x-1/2 -translate-y-1/2"
+            animate={{
+              left: ["35%", "25%", "35%"],
+              top: ["15%", "45%", "15%"],
+            }}
+            transition={{ duration: 5.5, delay: 1, repeat: Infinity, ease: "linear" }}
+          >
+            <Navigation className="h-4 w-4 rotate-[120deg]" />
           </motion.div>
         </div>
       </div>

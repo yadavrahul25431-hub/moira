@@ -41,37 +41,37 @@
   }
 
   .dark {
-    --background: 222 47% 11%;
+    --background: 229 63% 5%;
     --foreground: 0 0% 100%;
-    --card: 217 33% 18%;
+    --card: 219 42% 11%;
     --card-foreground: 0 0% 100%;
-    --popover: 217 33% 18%;
+    --popover: 219 42% 11%;
     --popover-foreground: 0 0% 100%;
-    --primary: 217 91% 60%;
+    --primary: 219 100% 65%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 258 90% 66%;
+    --secondary: 250 100% 69%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 217 33% 25%;
+    --muted: 223 49% 8%;
     --muted-foreground: 215 20% 65%;
-    --accent: 199 93% 60%;
+    --accent: 190 100% 50%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 359 83% 60%;
+    --destructive: 349 100% 65%;
     --destructive-foreground: 0 0% 100%;
-    --border: 217 33% 25%;
-    --input: 217 33% 25%;
-    --ring: 217 91% 60%;
+    --border: 228 20% 14%;
+    --input: 228 20% 14%;
+    --ring: 219 100% 65%;
 
-    --sidebar: 217 33% 18%;
+    --sidebar: 219 42% 11%;
     --sidebar-foreground: 0 0% 100%;
-    --sidebar-border: 217 33% 25%;
-    --sidebar-accent: 258 90% 66%;
+    --sidebar-border: 228 20% 14%;
+    --sidebar-accent: 250 100% 69%;
     --sidebar-accent-foreground: 0 0% 100%;
 
-    --chart-emerald: 142 71% 45%;
-    --chart-cyan: 199 93% 60%;
-    --chart-violet: 258 90% 66%;
-    --chart-amber: 45 93% 48%;
-    --chart-rose: 359 83% 60%;
+    --chart-emerald: 145 63% 50%;
+    --chart-cyan: 190 100% 50%;
+    --chart-violet: 250 100% 69%;
+    --chart-amber: 37 90% 51%;
+    --chart-rose: 349 100% 65%;
   }
 }
 
@@ -149,24 +149,50 @@
     border: 1px solid hsl(var(--border) / 0.3);
   }
 
+  /* Premium Linear Gradients */
+  .hero-gradient {
+    background: linear-gradient(
+      135deg,
+      #050816 0%,
+      #0B1120 25%,
+      #4F8CFF 60%,
+      #7B61FF 100%
+    );
+  }
+
+  .card-gradient {
+    background: linear-gradient(
+      180deg,
+      rgba(79,140,255,0.08),
+      rgba(123,97,255,0.05)
+    );
+  }
+
+  .button-gradient {
+    background: linear-gradient(
+      90deg,
+      #4F8CFF,
+      #7B61FF
+    );
+  }
+
+  .border-gradient {
+    background: linear-gradient(
+      90deg,
+      #4F8CFF,
+      #00D4FF,
+      #7B61FF
+    );
+  }
+
   /* Gradient text */
   .gradient-text {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(
       135deg,
       hsl(var(--primary)),
-      hsl(var(--chart-violet)),
-      hsl(var(--chart-cyan))
-    );
-  }
-
-  /* Gradient background */
-  .gradient-bg {
-    background: linear-gradient(
-      135deg,
-      hsl(var(--primary) / 0.1),
-      hsl(var(--chart-violet) / 0.05),
-      hsl(var(--chart-cyan) / 0.1)
+      hsl(var(--secondary)),
+      hsl(var(--accent))
     );
   }
 

@@ -15,14 +15,8 @@ const stats: StatItem[] = [
   {
     value: 12500,
     suffix: "+",
-    label: "Active Vehicles",
+    label: "Active vehicles",
     description: "Live monitored vehicles",
-  },
-  {
-    value: 420,
-    suffix: "",
-    label: "Traffic Incidents",
-    description: "Prevented daily",
   },
   {
     value: 12,
@@ -32,16 +26,23 @@ const stats: StatItem[] = [
     description: "Reduction in travel time",
   },
   {
+    value: 40,
+    suffix: "%",
+    prefix: "-",
+    label: "Traffic density",
+    description: "Avoided congestion zones",
+  },
+  {
     value: 24,
     suffix: "%",
     prefix: "+",
-    label: "Fuel Efficiency",
+    label: "Fuel savings",
     description: "Optimized consumption",
   },
   {
     value: 45,
     suffix: "k",
-    label: "Carbon Reduction",
+    label: "Carbon reduction",
     description: "Tons of CO2 saved",
   },
 ];

@@ -22,23 +22,15 @@ interface Feature {
 const features: Feature[] = [
   {
     icon: Sparkles,
-    title: "Smart Routing",
+    title: "Route optimization",
     description:
       "Neural networks analyze thousands of route permutations in real-time to deliver the fastest, most fuel-efficient paths.",
     gradient: "from-blue-500/20 to-cyan-500/10",
     iconColor: "text-blue-400",
   },
   {
-    icon: Radio,
-    title: "Traffic Prediction",
-    description:
-      "Machine learning models forecast congestion patterns and bottlenecks up to 4 hours ahead with 98% accuracy.",
-    gradient: "from-amber-500/20 to-orange-500/10",
-    iconColor: "text-amber-400",
-  },
-  {
     icon: BarChart3,
-    title: "Fleet Intelligence",
+    title: "Fleet management",
     description:
       "Comprehensive dashboards with real-time KPIs, driver performance scoring, and fuel consumption trends.",
     gradient: "from-violet-500/20 to-purple-500/10",
@@ -46,7 +38,7 @@ const features: Feature[] = [
   },
   {
     icon: LineChart,
-    title: "Predictive Analytics",
+    title: "Predictive analytics",
     description:
       "Anticipate vehicle maintenance needs and optimize resource allocation based on historical performance data.",
     gradient: "from-emerald-500/20 to-teal-500/10",
@@ -54,11 +46,19 @@ const features: Feature[] = [
   },
   {
     icon: ShieldAlert,
-    title: "Dynamic Incident Detection",
+    title: "Dynamic incident simulation",
     description:
       "Instantly detect accidents, weather events, or road closures and automatically reroute affected vehicles.",
     gradient: "from-rose-500/20 to-red-500/10",
     iconColor: "text-rose-400",
+  },
+  {
+    icon: Radio,
+    title: "EV optimization",
+    description:
+      "Intelligent range anxiety management, charging station routing, and battery lifespan preservation algorithms.",
+    gradient: "from-amber-500/20 to-orange-500/10",
+    iconColor: "text-amber-400",
   },
   {
     icon: Bot,
@@ -97,9 +97,9 @@ function FeatureCard({ feature }: { feature: Feature }) {
       whileHover={{ y: -6, transition: { duration: 0.3 } }}
       className="group relative"
     >
-      <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/30 via-transparent to-accent/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md" />
+      <div className="absolute -inset-px rounded-2xl border-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md" />
 
-      <div className="relative h-full rounded-2xl glass p-6 sm:p-7 transition-all duration-500 border border-white/5 group-hover:border-primary/50 group-hover:bg-card/80">
+      <div className="relative h-full rounded-2xl card-gradient p-6 sm:p-7 transition-all duration-500 border border-white/5 group-hover:border-primary/50">
         <div
           className={`mb-5 inline-flex items-center justify-center h-12 w-12 rounded-xl bg-gradient-to-br ${feature.gradient} border border-white/[0.06]`}
         >

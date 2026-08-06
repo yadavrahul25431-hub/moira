@@ -79,10 +79,8 @@ export function HeroSection() {
     >
       {/* ── Animated Background ────────────────────── */}
       <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
-        {/* Gradient orbs */}
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-500/15 blur-[120px] animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-violet-500/12 blur-[120px] animate-pulse [animation-delay:1s]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-cyan-500/8 blur-[150px] animate-pulse [animation-delay:2s]" />
+        {/* Gradient orb */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full hero-gradient opacity-30 blur-[150px] animate-pulse_glow" />
 
         {/* Grid overlay */}
         <div className="absolute inset-0 bg-grid opacity-60" />
@@ -132,23 +130,24 @@ export function HeroSection() {
               variants={itemVariants}
               className="mt-6 text-base sm:text-lg lg:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed font-subheading"
             >
-              Transforming mobility through artificial intelligence.
+              AI-powered mobility intelligence designed for modern transportation ecosystems.
             </motion.p>
 
             {/* CTAs */}
             <motion.div
               variants={itemVariants}
-              className="mt-10 flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start"
+              className="mt-10 flex flex-col sm:flex-row items-center gap-6 justify-center lg:justify-start"
             >
-              <Link
-                href="/dashboard"
-                className="group relative inline-flex items-center gap-2 px-8 py-4 text-base font-semibold text-white rounded-full bg-primary overflow-hidden shadow-[0_0_30px_rgba(79,140,255,0.4)] transition-all duration-500 hover:shadow-[0_0_40px_rgba(79,140,255,0.6)] hover:scale-[1.02]"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000" />
-                Launch Dashboard
-                <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-              <button className="group inline-flex items-center gap-3 px-8 py-4 text-base font-medium text-foreground rounded-full border border-white/10 hover:bg-white/5 transition-all duration-300 hover:border-white/20 hover:scale-[1.02]">
+              <div className="relative group rounded-full p-[2px] border-gradient overflow-hidden hover:shadow-[0_0_30px_rgba(79,140,255,0.4)] transition-all duration-500">
+                <Link
+                  href="/dashboard"
+                  className="relative flex items-center gap-2 px-8 py-4 text-base font-semibold text-white rounded-full button-gradient bg-[length:200%_100%] transition-all duration-500 hover:bg-right hover:scale-[1.02]"
+                >
+                  Launch Dashboard
+                  <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
+              </div>
+              <button className="group inline-flex items-center gap-3 px-8 py-4 text-base font-medium text-foreground rounded-full border border-white/10 glass hover:bg-white/5 transition-all duration-300 hover:border-white/20 hover:scale-[1.02] shadow-lg">
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 transition-colors group-hover:bg-white/20">
                   <Play className="h-3 w-3 ml-0.5" />
                 </div>
