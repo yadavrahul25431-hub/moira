@@ -1,0 +1,376 @@
+// ===========================================
+// MoveMind AI - Database Schema
+// ===========================================
+// PostgreSQL + Prisma ORM
+// Covers: Auth, Fleet, Routes, Analytics, AI
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ─────────────────────────────────────────────
+// AUTHENTICATION & USERS
+// ─────────────────────────────────────────────
+
+enum UserRole {
+  ADMIN
+  MANAGER
+  DRIVER
+  VIEWER
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  passwordHash  String
+  firstName     String
+  lastName      String
+  role          UserRole  @default(VIEWER)
+  avatarUrl     String?
+  phone         String?
+  isActive      Boolean   @default(true)
+  lastLoginAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  refreshTokens  RefreshToken[]
+  vehicles       Vehicle[]       @relation("AssignedDriver")
+  routes         Route[]
+  conversations  Conversation[]
+  notifications  Notification[]
+  activityLogs   ActivityLog[]
+
+  @@map("users")
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("refresh_tokens")
+}
+
+// ─────────────────────────────────────────────
+// FLEET MANAGEMENT
+// ─────────────────────────────────────────────
+
+enum VehicleStatus {
+  ACTIVE
+  IDLE
+  MAINTENANCE
+  OUT_OF_SERVICE
+}
+
+enum VehicleType {
+  SEDAN
+  SUV
+  VAN
+  TRUCK
+  BUS
+  ELECTRIC
+  HYBRID
+}
+
+enum FuelType {
+  GASOLINE
+  DIESEL
+  ELECTRIC
+  HYBRID
+  CNG
+}
+
+model Vehicle {
+  id              String        @id @default(cuid())
+  registrationNo  String        @unique
+  name            String
+  type            VehicleType
+  fuelType        FuelType
+  status          VehicleStatus @default(IDLE)
+  make            String
+  model           String
+  year            Int
+  color           String?
+  mileage         Float         @default(0)
+  fuelLevel       Float         @default(100)
+  lastServiceDate DateTime?
+  nextServiceDate DateTime?
+  insuranceExpiry DateTime?
+  currentLat      Float?
+  currentLng      Float?
+  currentSpeed    Float?
+  isOnline        Boolean       @default(false)
+  driverId        String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  // Relations
+  driver           User?             @relation("AssignedDriver", fields: [driverId], references: [id], onDelete: SetNull)
+  routes           Route[]
+  telemetryRecords TelemetryRecord[]
+  maintenanceLogs  MaintenanceLog[]
+  alerts           VehicleAlert[]
+
+  @@index([driverId])
+  @@index([status])
+  @@map("vehicles")
+}
+
+model TelemetryRecord {
+  id          String   @id @default(cuid())
+  vehicleId   String
+  latitude    Float
+  longitude   Float
+  speed       Float
+  heading     Float?
+  fuelLevel   Float?
+  engineTemp  Float?
+  odometer    Float?
+  recordedAt  DateTime @default(now())
+
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@index([vehicleId, recordedAt])
+  @@map("telemetry_records")
+}
+
+model MaintenanceLog {
+  id          String   @id @default(cuid())
+  vehicleId   String
+  type        String
+  description String
+  cost        Float?
+  odometerAt  Float?
+  performedAt DateTime @default(now())
+  nextDueAt   DateTime?
+  createdAt   DateTime @default(now())
+
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@index([vehicleId])
+  @@map("maintenance_logs")
+}
+
+enum AlertSeverity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+model VehicleAlert {
+  id          String        @id @default(cuid())
+  vehicleId   String
+  type        String
+  message     String
+  severity    AlertSeverity @default(MEDIUM)
+  isResolved  Boolean       @default(false)
+  resolvedAt  DateTime?
+  createdAt   DateTime      @default(now())
+
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@index([vehicleId, isResolved])
+  @@map("vehicle_alerts")
+}
+
+// ─────────────────────────────────────────────
+// ROUTE MANAGEMENT
+// ─────────────────────────────────────────────
+
+enum RouteStatus {
+  PLANNED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model Route {
+  id              String      @id @default(cuid())
+  name            String
+  userId          String
+  vehicleId       String?
+  status          RouteStatus @default(PLANNED)
+  originLat       Float
+  originLng       Float
+  originAddress   String
+  destLat         Float
+  destLng         Float
+  destAddress     String
+  distanceKm      Float?
+  estimatedTimeMin Float?
+  actualTimeMin   Float?
+  fuelConsumed    Float?
+  co2Emission     Float?
+  isOptimized     Boolean     @default(false)
+  scheduledAt     DateTime?
+  startedAt       DateTime?
+  completedAt     DateTime?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  // Relations
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  vehicle   Vehicle?   @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  waypoints Waypoint[]
+
+  @@index([userId])
+  @@index([vehicleId])
+  @@index([status])
+  @@map("routes")
+}
+
+model Waypoint {
+  id        String   @id @default(cuid())
+  routeId   String
+  latitude  Float
+  longitude Float
+  address   String?
+  order     Int
+  arrivedAt DateTime?
+  createdAt DateTime @default(now())
+
+  route Route @relation(fields: [routeId], references: [id], onDelete: Cascade)
+
+  @@index([routeId])
+  @@map("waypoints")
+}
+
+// ─────────────────────────────────────────────
+// TRAFFIC & ANALYTICS
+// ─────────────────────────────────────────────
+
+model TrafficPrediction {
+  id            String   @id @default(cuid())
+  regionName    String
+  latitude      Float
+  longitude     Float
+  radiusKm      Float    @default(5)
+  congestionIdx Float
+  avgSpeedKmh   Float?
+  incidentCount Int      @default(0)
+  predictedAt   DateTime
+  validUntil    DateTime
+  confidence    Float    @default(0.8)
+  createdAt     DateTime @default(now())
+
+  @@index([regionName, predictedAt])
+  @@map("traffic_predictions")
+}
+
+model AnalyticsSnapshot {
+  id                 String   @id @default(cuid())
+  date               DateTime @db.Date
+  totalTrips         Int      @default(0)
+  totalDistanceKm    Float    @default(0)
+  totalFuelConsumed  Float    @default(0)
+  totalCo2Emission   Float    @default(0)
+  avgTripDurationMin Float    @default(0)
+  activeVehicles     Int      @default(0)
+  onTimePercentage   Float    @default(0)
+  costSavings        Float    @default(0)
+  createdAt          DateTime @default(now())
+
+  @@unique([date])
+  @@map("analytics_snapshots")
+}
+
+// ─────────────────────────────────────────────
+// AI ASSISTANT
+// ─────────────────────────────────────────────
+
+model Conversation {
+  id        String    @id @default(cuid())
+  userId    String
+  title     String    @default("New Conversation")
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages Message[]
+
+  @@index([userId])
+  @@map("conversations")
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+  SYSTEM
+}
+
+model Message {
+  id             String      @id @default(cuid())
+  conversationId String
+  role           MessageRole
+  content        String
+  metadata       Json?
+  createdAt      DateTime    @default(now())
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId, createdAt])
+  @@map("messages")
+}
+
+// ─────────────────────────────────────────────
+// SYSTEM
+// ─────────────────────────────────────────────
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  message   String
+  type      String   @default("info")
+  isRead    Boolean  @default(false)
+  readAt    DateTime?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isRead])
+  @@map("notifications")
+}
+
+enum ActivityAction {
+  LOGIN
+  LOGOUT
+  CREATE
+  UPDATE
+  DELETE
+  ROUTE_START
+  ROUTE_COMPLETE
+  VEHICLE_ASSIGN
+  AI_QUERY
+}
+
+model ActivityLog {
+  id         String         @id @default(cuid())
+  userId     String
+  action     ActivityAction
+  entity     String?
+  entityId   String?
+  metadata   Json?
+  ipAddress  String?
+  createdAt  DateTime       @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([action])
+  @@map("activity_logs")
+}
